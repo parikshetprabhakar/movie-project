@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row top-display justify-content-center">
+        <div class="col-12 mt-5">
+            <div class="input-group mb-3">
+                <input #movieName type="text" class="form-control" placeholder="Search movie">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" (click)="searchMovie(movieName.value)">Go</button>
+                </div>
+            </div>
+        </div>
+        <a class="btn custom-prm-btn" routerLink="/watch-list">My watch list</a>
+        <div class="col-12 movie-block" *ngIf="searchMovieList.length">
+            <div class="row justify-content-around movie-details-container">
+                <div [class.d-none]="data.poster_path === null" class="col-4 movie-card"
+                    *ngFor="let data of searchMovieList">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{'http://image.tmdb.org/t/p/w185'+data.poster_path}}"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{data.title}}</h5>
+                            <p class="card-text">{{data.overview | slice:0:100}}...</p>
+                        </div>
+                        <button (click)="addTowatchList(data)" class="btn btn-primary">Add to watchlist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 movie-trending-list text-center movie-block">
+            <h2 class="w-100 text-center">Trending Movies</h2>
+            <div class="d-flex flex-wrap justify-content-center">
+                <div [class.d-none]="data.poster_path === null" class="col-4 movie-card"
+                    *ngFor="let data of trendingMovieList | slice:0:10">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{'http://image.tmdb.org/t/p/w185'+data.poster_path}}"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{data.title}}</h5>
+                            <p class="card-text">{{data.overview | slice:0:100}}...</p>
+                        </div>
+                        <button (click)="addTowatchList(data)" class="btn btn-primary">Add to watchlist</button>
+                    </div>
+                </div>
+            </div>
+            <a class="btn custom-prm-btn" routerLink="/trending-movies">View All</a>
+        </div>
+
+        <div class="col-12 movie-trending-list text-center movie-block">
+            <h2 class="w-100 text-center">Popular Movies</h2>
+            <div class="d-flex flex-wrap justify-content-center">
+                <div [class.d-none]="data.poster_path === null" class="col-4 movie-card"
+                    *ngFor="let data of popularMoviesList | slice:0:10">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{'http://image.tmdb.org/t/p/w185'+data.poster_path}}"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{data.title}}</h5>
+                            <p class="card-text">{{data.overview | slice:0:100}}...</p>
+                        </div>
+                        <button (click)="addTowatchList(data)" class="btn btn-primary">Add to watchlist</button>
+                    </div>
+                </div>
+            </div>
+
+            <a class="btn custom-prm-btn" routerLink="/popular-movies">View All</a>
+        </div>
+    </div>
+</div>

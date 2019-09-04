@@ -1,0 +1,29 @@
+<div *ngIf="!nowatchList; else noMovies" class="">
+    <div class="container">
+        <div class="row">
+                <div class="col-12 text-center custom-head">Trending Movies</div>
+            <div class="col-12" *ngIf="watchlist.length">
+                <div class="row justify-content-around movie-details-container">
+                    <div class="col-4 movie-card"
+                        *ngFor="let data of watchlist">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{'http://image.tmdb.org/t/p/w185'+data.poster_path}}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{data.title}}</h5>
+                                <p class="card-text">{{data.overview | slice:0:100}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noMovies>
+    <div class="viewport-height w-100 d-flex justify-content-center align-items-center">
+        <h4>No movies Added</h4>
+    </div>
+
+</ng-template>

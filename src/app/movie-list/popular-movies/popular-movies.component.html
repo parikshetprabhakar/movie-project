@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center custom-head">Popular Movies</div>
+        <div class="col-12" *ngIf="popularMovieList.length">
+            <div class="row justify-content-around movie-details-container">
+                <div class="col-4 movie-card"
+                    *ngFor="let data of popularMovieList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{'http://image.tmdb.org/t/p/w185'+data.poster_path}}"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{data.title}}</h5>
+                            <p class="card-text">{{data.overview | slice:0:100}}</p>
+                        </div>
+                        <button (click)="addTowatchList(data)" class="btn btn-primary">Add to watchlist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center pagination-block">
+            <ngb-pagination [(page)]="page"
+                [collectionSize]="popularMovieList.length" [directionLinks]="false">
+                <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+            </ngb-pagination>
+        </div>
+    </div>
+</div>
